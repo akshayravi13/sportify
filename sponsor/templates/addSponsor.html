@@ -1,0 +1,29 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+<script>
+    function submitForm() {
+      alert("Sponsor Profile Added Successfully ");
+      window.open("{% url 'sponsors' %}");
+    }
+</script>
+
+<h1>Create Sponsor Profile</h1>
+
+
+
+
+
+    <form action="{% url 'addSponsor' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary" >Submit</button>
+
+    </form>
+
+
+
+{% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,61 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+
+<div style="padding:50px">
+<h1 style = "margin-bottom: 10px;text-align: center;">Athletes</h1>
+
+<a href="{% url 'addAthlete' %}"><button type="button" class="btn btn-outline-primary" style="padding:10px"><i class="fa fa-plus"></i> New Profile</button></a>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-primary" role="alert" style="padding:20px">
+    {{message.tags}}
+    {{message}}
+    
+</div>
+{% endfor %}
+{% endif %}
+
+<div style="margin-top:20px">
+<table id = "example" class="table table-hover container">
+    <thead>
+        <tr>
+            <th>Sr.No</th>
+            <th>Name</th>
+            <th>Sport</th>
+            <th>Description</th>
+            <th>Email</th>
+            <th>Image</th>
+            <th>Actions</th>
+
+            
+
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for athlete in athlete_list %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{athlete.f_name}}  {{athlete.l_name}}</td>
+            <td>{{athlete.sport}}</td>
+            <td>{{athlete.description}}</td>
+            <td>{{athlete.email}}</td>
+            <td><img src="{{athlete.image.url}}" style="width:100px;height:100px;border-radius:20% ;" ></td>
+            <td><a href="{% url 'athleteUpdate' athlete.id %}"><button class="btn btn-warning" >Update</button></a>  
+            <a href="{% url 'athleteDelete' athlete.id %}"><button class="btn btn-danger" >Delete</button></a></td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+</div>
+
+{% include 'footer.html' %}
+{% endblock %}

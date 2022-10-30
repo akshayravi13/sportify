@@ -1,0 +1,15 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+
+<h1>Update sponsor profile</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-warning">Submit</button>
+</form>
+
+{% include 'footer.html' %}
+{% endblock %}

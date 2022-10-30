@@ -1,0 +1,63 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+
+<div style="padding:50px">
+    <h1 style = "margin-bottom: 10px; text-align: center;">Sponsors</h1>
+    <a href="{% url 'addSponsor' %}"><button type="button" class="btn btn-outline-primary" style="padding:10px"><i class="fa fa-plus"></i> New Sponsor</button></a>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-primary" role="alert">
+                {{message.tags}}
+                {{message}}
+                
+            </div>
+            {% endfor %}
+            {% endif %}
+
+    <div style="margin-top:20px">
+
+
+        <table id = "example" class="table table-hover container">
+            <thead>
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Company</th>
+                    <th>Email</th>
+                    <th>Offer</th>
+
+                    <th>Logo</th>
+                    <th>Actions</th>
+
+                    
+                    
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for sponsor in sponsor_list %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{sponsor.name}}</td>
+                    <td>{{sponsor.email}}</td>
+                    <td>{{sponsor.offer}}</td>
+
+                    <td><img src="{{sponsor.image.url}}" style="width:100px;height:100px;border-radius:20% ;" ></td>
+            <td><a href="{% url 'sponsorUpdate' sponsor.id %}"><button class="btn btn-warning" >Update</button></a>
+            <a href="{% url 'sponsorDelete' sponsor.id %}"><button class="btn btn-danger" >Delete</button></a></td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+{% include 'footer.html' %}
+{% endblock %}

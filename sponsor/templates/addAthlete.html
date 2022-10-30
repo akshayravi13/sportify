@@ -1,0 +1,29 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+<script>
+    function submitForm() {
+      alert("Athlete Profile Added Successfully ");
+      window.open("{% url 'athletes' %}");
+    }
+</script>
+
+<h1>Create Athlete Profile</h1>
+
+
+
+
+
+    <form action="{% url 'addAthlete' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary" >Submit</button>
+
+    </form>
+
+
+
+{% include 'footer.html' %}
+{% endblock %}
